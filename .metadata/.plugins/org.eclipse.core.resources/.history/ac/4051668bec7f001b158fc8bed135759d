@@ -31,7 +31,7 @@ public class BlockStats {
 	@Override
 	public String toString(){
 		StringBuilder sb  = new StringBuilder();
-		sb.append("WRITE\n");
+		sb.append("\nWRITE\n");
 		for (String filename : statsWrite.keySet()) {
 			sb.append(filename + " written "+ statsWrite.get(filename) + " times\n");
 		}

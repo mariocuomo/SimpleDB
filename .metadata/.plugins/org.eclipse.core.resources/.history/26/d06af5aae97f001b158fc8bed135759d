@@ -25,7 +25,5 @@ public class BufferTest {
       Page p2 = buff2.contents();
       p2.setInt(80, 9999);     // This modification
       buff2.setModified(1, 0); // won't get written to disk.
-      
-      System.out.println(db.fileMgr().getBlockStats().toString());
    }
 }

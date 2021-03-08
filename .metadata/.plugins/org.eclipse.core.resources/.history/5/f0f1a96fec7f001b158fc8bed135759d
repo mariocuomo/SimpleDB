@@ -38,7 +38,7 @@ public class BlockStats {
 		
 		sb.append("\nREAD\n");
 		for (String filename : statsRead.keySet()) {
-			sb.append(filename + " read "+ statsRead.get(filename) + " times\n");
+			sb.append(filename + " read "+ statsRead.get(filename) + " times");
 		}
 		
 		return sb.toString();

@@ -15,7 +15,7 @@ class EmbeddedConnection extends ConnectionAdapter {
    private SimpleDB db;
    private Transaction currentTx;
    private Planner planner;
-   private Boolean enableStats=true;
+   private Boolean enableStats;
 
    /**
     * Creates a connection
@@ -48,10 +48,6 @@ class EmbeddedConnection extends ConnectionAdapter {
    public void commit() throws SQLException {
       currentTx.commit();
       currentTx = db.newTx();
-      if(enableStats) {
-    	  System.out.println(db.fileMgr().getBlockStats());
-    	  db.fileMgr().resetBlockStats();
-      }
    }
 
    /**

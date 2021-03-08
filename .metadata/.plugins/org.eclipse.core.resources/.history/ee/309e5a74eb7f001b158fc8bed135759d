@@ -51,7 +51,7 @@ public class Transaction {
     */
    public void commit() {
       recoveryMgr.commit();
-      System.out.println("transaction " + txnum + " committed\n");
+      System.out.println("transaction " + txnum + " committed\n" + fm.getBlockStats().toString());
       concurMgr.release();
       mybuffers.unpinAll();
    }

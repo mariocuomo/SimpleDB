@@ -15,7 +15,7 @@ class EmbeddedConnection extends ConnectionAdapter {
    private SimpleDB db;
    private Transaction currentTx;
    private Planner planner;
-   private Boolean enableStats=true;
+   private Boolean enableStats;
 
    /**
     * Creates a connection

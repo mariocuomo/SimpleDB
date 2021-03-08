@@ -30,13 +30,13 @@ public class BlockStats {
 	
 	@Override
 	public String toString(){
-		StringBuilder sb  = new StringBuilder();
-		sb.append("WRITE\n");
+		StringBuilder sb  = new StringBuilder("Stats\n");
+		sb.append("logWrittenBlock\n");
 		for (String filename : statsWrite.keySet()) {
 			sb.append(filename + " written "+ statsWrite.get(filename) + " times\n");
 		}
 		
-		sb.append("\nREAD\n");
+		sb.append("\nlogReadBlock\n");
 		for (String filename : statsRead.keySet()) {
 			sb.append(filename + " read "+ statsRead.get(filename) + " times\n");
 		}
