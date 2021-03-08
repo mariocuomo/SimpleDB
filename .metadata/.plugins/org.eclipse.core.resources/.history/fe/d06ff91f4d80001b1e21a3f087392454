@@ -99,26 +99,7 @@ public class Buffer {
     */
    void unpin() {
       pins--;
-	  istant_unpin=System.currentTimeMillis();
    }
-
-public long getIstant_load() {
-	return istant_load;
-}
-
-public void setIstant_load(long istant_load) {
-	this.istant_load = istant_load;
-}
-
-public long getIstant_unpin() {
-	return istant_unpin;
-}
-
-public void setIstant_unpin(long istant_unpin) {
-	this.istant_unpin = istant_unpin;
-}
-   
-   
 
 
    

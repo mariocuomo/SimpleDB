@@ -73,7 +73,6 @@ public class Buffer {
       blk = b;
       fm.read(blk, contents);
       pins = 0;
-      istant_load=System.currentTimeMillis();
    }
    
    /**
@@ -99,7 +98,6 @@ public class Buffer {
     */
    void unpin() {
       pins--;
-	  istant_unpin=System.currentTimeMillis();
    }
 
 public long getIstant_load() {
@@ -117,10 +115,6 @@ public long getIstant_unpin() {
 public void setIstant_unpin(long istant_unpin) {
 	this.istant_unpin = istant_unpin;
 }
-   
-   
-
-
    
    
 }

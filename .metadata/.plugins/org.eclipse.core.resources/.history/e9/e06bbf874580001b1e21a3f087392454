@@ -1,8 +1,5 @@
 package simpledb.buffer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import simpledb.file.*;
 import simpledb.log.LogMgr;
 
@@ -15,15 +12,6 @@ public class BufferMgr {
    private Buffer[] bufferpool;
    private int numAvailable;
    private static final long MAX_TIME = 10000; // 10 seconds
-   /*
-    * Four general replacement strategies
-    * 0->naïve
-    * 1->FIFO
-    * 2->LRU
-    * 3->clock
-    */
-   int strategy=0; 
-   int lastBufferModified=0;
    
    /**
     * Creates a buffer manager having the specified number 
@@ -116,7 +104,6 @@ public class BufferMgr {
          if (buff == null)
             return null;
          buff.assignToBlock(blk);
-         
       }
       if (!buff.isPinned())
          numAvailable--;
@@ -134,89 +121,9 @@ public class BufferMgr {
    }
    
    private Buffer chooseUnpinnedBuffer() {
-	  switch(strategy) {
-		  case 0 :
-		      return chooseUnpinnedBufferNaive();
-		   
-		  case 1 :
-			  return chooseUnpinnedBufferFIFO();
-		      
-		  case 2 :
-			  return chooseUnpinnedBufferLRU();
-		  
-		  case 3 :
-			  return chooseUnpinnedBufferClock();
-
-	  }
-      return null;
-   }
-   
-   private Buffer chooseUnpinnedBufferNaive() {
       for (Buffer buff : bufferpool)
          if (!buff.isPinned())
          return buff;
       return null;
-   }
-   
-   private Buffer chooseUnpinnedBufferFIFO() {
-	   Buffer buffer=null;
-	   for (Buffer buff : bufferpool)
-	          if (!buff.isPinned()) {
-	        	  if(buffer==null)
-	        		  buffer=buff;
-	        	  else {
-	        		  if(buff.getIstant_load() < buffer.getIstant_load())
-	        			  buffer=buff;
-	        	  }
-	          }
-	   return buffer;
-
-   }
-   
-   private Buffer chooseUnpinnedBufferLRU() {
-	   Buffer buffer=null;
-	   for (Buffer buff : bufferpool)
-	          if (!buff.isPinned()) {
-	        	  if(buffer==null)
-	        		  buffer=buff;
-	        	  else {
-	        		  if(buff.getIstant_unpin() < buffer.getIstant_unpin())
-	        			  buffer=buff;
-	        	  }
-	          }
-	   return buffer;
-   }
-   
-   private Buffer chooseUnpinnedBufferClock() {
-	   ArrayList<Buffer> listBuffer= new ArrayList<>(Arrays.asList(bufferpool));
-
-	   if(lastBufferModified==0) {
-	      for (Buffer buff : bufferpool)
-	          if (!buff.isPinned()){
-	        	  lastBufferModified=listBuffer.indexOf(buff);
-	        	  return buff;
-	          }
-	      return null;
-	   }
-	   
-	   for(int i=lastBufferModified; i<bufferpool.length;i++)
-	   {
-		   Buffer buff= bufferpool[i];
-		   if (!buff.isPinned()){
-	        	  lastBufferModified=i;
-	        	  return buff;
-	       }
-	   }
-	   for(int i=0; i<lastBufferModified;i++)
-	   {
-		   Buffer buff= bufferpool[i];
-		   if (!buff.isPinned()){
-	        	  lastBufferModified=i;
-	        	  return buff;
-	       }
-	   }
-	   
-	   return null;
-	   
    }
 }
