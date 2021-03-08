@@ -1,0 +1,26 @@
+package simpledb.file;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class BlockStats {
+	Map<String, Integer> stats = new HashMap<String,Integer>();
+	
+	public void reset() {
+		
+	}
+	
+	public void logWrittenBlock(BlockId block) {
+		
+	}
+	
+	public void logReadBlock(BlockId block) {
+		
+	}
+	
+	@Override
+	public String toString(){
+		//
+		return "";
+	}
+}

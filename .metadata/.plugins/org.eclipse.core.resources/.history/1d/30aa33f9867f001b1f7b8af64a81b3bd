@@ -1,0 +1,5 @@
+package simpledb.file;
+
+public class BlockStats {
+
+}

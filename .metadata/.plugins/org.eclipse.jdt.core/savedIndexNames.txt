@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\cuomo\Desktop\Magistrale\Primo anno\Secondo Semestre\Basi di dati II\SimpleDB\.metadata\.plugins\org.eclipse.jdt.core
+123916842.index
+2513262506.index
+816144872.index

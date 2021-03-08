@@ -1,0 +1,22 @@
+package simpledb.file;
+
+public class BlockStats {
+	  
+	public void reset() {
+		
+	}
+	
+	public void logWrittenBlock(BlockId block) {
+		
+	}
+	
+	public void logReadBlock(BlockId block) {
+		
+	}
+	
+	@Override
+	public String toString(){
+		//
+		return "";
+	}
+}
