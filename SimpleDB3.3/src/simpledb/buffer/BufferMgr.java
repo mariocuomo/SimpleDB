@@ -15,6 +15,7 @@ public class BufferMgr {
    private Buffer[] bufferpool;
    private int numAvailable;
    private static final long MAX_TIME = 10000; // 10 seconds
+   
    /*
     * Four general replacement strategies
     * 0->naïve
@@ -22,7 +23,7 @@ public class BufferMgr {
     * 2->LRU
     * 3->clock
     */
-   int strategy=0; 
+   int strategy=2; 
    int lastBufferModified=0;
    
    /**
@@ -219,4 +220,20 @@ public class BufferMgr {
 	   return null;
 	   
    }
+
+public Buffer[] getBufferpool() {
+	return bufferpool;
+}
+
+public void setBufferpool(Buffer[] bufferpool) {
+	this.bufferpool = bufferpool;
+}
+
+public void setStrategy(int strategy) {
+	this.strategy = strategy;
+}
+   
+public void setNumAvailable(int numAvailable) {
+	this.numAvailable = numAvailable;
+}
 }
