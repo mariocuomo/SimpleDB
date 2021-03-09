@@ -9,5 +9,6 @@ SimpleDB is a multi-user transactional database server written in Java, which in
 -----
 ## Use case
 This repository is inspired by [Database Systems II course](http://www.dia.uniroma3.it/~atzeni/didattica/BD/BDIIindex.html) in Roma Tre University.<br/>
-My updates to SimpleDB system
+My updates to SimpleDB system:
 * Created a class to store statistics of reading/writing blocks
+* Implemented other replacement strategies (FIFO, LRU, clock) 
