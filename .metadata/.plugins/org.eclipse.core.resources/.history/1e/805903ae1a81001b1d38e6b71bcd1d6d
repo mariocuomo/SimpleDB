@@ -69,13 +69,12 @@ public class BufferExamTest {
 		      bm.pin(blk70); //pin(70)
 	      }
 	      
-	      //clock strategy
+	      //LRU strategy
 	      if(strategy==3) {
-	    	  bm.setLastBufferModified(-1);
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
-		      (bm.getBufferpool()[0]).setModified(1, 0); //setXXX(60,...)
-		      bm.unpin(bm.getBufferpool()[0]); //unpin60
+		      (bm.getBufferpool()[2]).setModified(1, 0); //setXXX(60,...)
+		      bm.unpin(bm.getBufferpool()[2]); //unpin60
 		      bm.flushAll(0);//flushAll
 		      (bm.getBufferpool()[3]).setModified(1, 0); //setXXX(47,...)
 		      bm.unpin(bm.getBufferpool()[3]); //unpin47

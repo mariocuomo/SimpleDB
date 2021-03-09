@@ -71,7 +71,7 @@ public class BufferExamTest {
 	      
 	      //clock strategy
 	      if(strategy==3) {
-	    	  bm.setLastBufferModified(-1);
+	    	  bm.setLastBufferModified(0);
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
 		      (bm.getBufferpool()[0]).setModified(1, 0); //setXXX(60,...)

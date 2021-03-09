@@ -200,7 +200,7 @@ public class BufferMgr {
 		      return null;
 		   }
 	   
-	   for(int i=lastBufferModified+1; i<bufferpool.length;i++)
+	   for(int i=lastBufferModified; i<bufferpool.length;i++)
 	   {
 		   Buffer buff= bufferpool[i];
 		   if (!buff.isPinned()){

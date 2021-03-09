@@ -190,17 +190,17 @@ public class BufferMgr {
    
    private Buffer chooseUnpinnedBufferClock() {
 	   ArrayList<Buffer> listBuffer= new ArrayList<>(Arrays.asList(bufferpool));
+
+	   if(lastBufferModified==0) {
+	      for (Buffer buff : bufferpool)
+	          if (!buff.isPinned()){
+	        	  lastBufferModified=listBuffer.indexOf(buff);
+	        	  return buff;
+	          }
+	      return null;
+	   }
 	   
-	   if(lastBufferModified==-1) {
-		      for (Buffer buff : bufferpool)
-		          if (!buff.isPinned()){
-		        	  lastBufferModified=listBuffer.indexOf(buff);
-		        	  return buff;
-		          }
-		      return null;
-		   }
-	   
-	   for(int i=lastBufferModified+1; i<bufferpool.length;i++)
+	   for(int i=lastBufferModified; i<bufferpool.length;i++)
 	   {
 		   Buffer buff= bufferpool[i];
 		   if (!buff.isPinned()){

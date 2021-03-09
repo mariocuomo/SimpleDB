@@ -23,8 +23,8 @@ public class BufferMgr {
     * 2->LRU
     * 3->clock
     */
-   int strategy=3; 
-   int lastBufferModified=-1;
+   int strategy=2; 
+   int lastBufferModified=0;
    
    /**
     * Creates a buffer manager having the specified number 
@@ -190,17 +190,17 @@ public class BufferMgr {
    
    private Buffer chooseUnpinnedBufferClock() {
 	   ArrayList<Buffer> listBuffer= new ArrayList<>(Arrays.asList(bufferpool));
+
+	   if(lastBufferModified==0) {
+	      for (Buffer buff : bufferpool)
+	          if (!buff.isPinned()){
+	        	  lastBufferModified=listBuffer.indexOf(buff);
+	        	  return buff;
+	          }
+	      return null;
+	   }
 	   
-	   if(lastBufferModified==-1) {
-		      for (Buffer buff : bufferpool)
-		          if (!buff.isPinned()){
-		        	  lastBufferModified=listBuffer.indexOf(buff);
-		        	  return buff;
-		          }
-		      return null;
-		   }
-	   
-	   for(int i=lastBufferModified+1; i<bufferpool.length;i++)
+	   for(int i=lastBufferModified; i<bufferpool.length;i++)
 	   {
 		   Buffer buff= bufferpool[i];
 		   if (!buff.isPinned()){
@@ -221,31 +221,19 @@ public class BufferMgr {
 	   
    }
 
-	public Buffer[] getBufferpool() {
-		return bufferpool;
-	}
-	
-	public void setBufferpool(Buffer[] bufferpool) {
-		this.bufferpool = bufferpool;
-	}
-	
-	public void setStrategy(int strategy) {
-		this.strategy = strategy;
-	}
-	   
-	public void setNumAvailable(int numAvailable) {
-		this.numAvailable = numAvailable;
-	}
-
-	public int getLastBufferModified() {
-		return lastBufferModified;
-	}
-
-	public void setLastBufferModified(int lastBufferModified) {
-		this.lastBufferModified = lastBufferModified;
-	}
-	
-	
+public Buffer[] getBufferpool() {
+	return bufferpool;
 }
 
+public void setBufferpool(Buffer[] bufferpool) {
+	this.bufferpool = bufferpool;
+}
 
+public void setStrategy(int strategy) {
+	this.strategy = strategy;
+}
+   
+public void setNumAvailable(int numAvailable) {
+	this.numAvailable = numAvailable;
+}
+}
