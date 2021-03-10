@@ -23,7 +23,7 @@ public class BufferMgr {
     * 2->LRU
     * 3->clock
     */
-   int strategy=1; 
+   int strategy=3; 
    int lastBufferModified=-1;
    
    /**
