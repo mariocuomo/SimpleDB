@@ -1,6 +1,8 @@
 package simpledb.record;
 
 import static java.sql.Types.INTEGER;
+
+
 import simpledb.file.*;
 import simpledb.tx.Transaction;
 
@@ -104,6 +106,12 @@ public class RecordPage {
       return blk;
    }
    
+   public Boolean isFree(int slot) {
+	   if (offset(slot)==EMPTY)
+		   return true;
+	   return false;
+   }
+   
    // Private auxiliary methods
    
    /**
@@ -130,6 +138,8 @@ public class RecordPage {
    private int offset(int slot) {
       return slot * layout.slotSize();
    }
+   
+   
 }
 
 

@@ -1,0 +1,61 @@
+package simpledb.record;
+
+import simpledb.server.SimpleDB;
+
+import java.nio.charset.Charset;
+import java.util.Random;
+
+import simpledb.file.BlockId;
+import simpledb.tx.Transaction;
+
+public class RecordExamTest {
+   public static void main(String[] args) throws Exception {
+
+      SimpleDB db = new SimpleDB("recordtesttt", 2000, 500);
+      Transaction tx = db.newTx();
+
+      Schema sch = new Schema();
+      sch.addIntField("A");
+      sch.addStringField("B", 12);
+      
+      Layout layout = new Layout(sch);
+      for (String fldname : layout.schema().fields()) {
+          int offset = layout.offset(fldname);
+          System.out.println(fldname + " has offset " + offset);
+       }
+      
+      BlockId blk = tx.append("testRecordExam");
+      tx.pin(blk);
+      RecordPage rp = new RecordPage(tx, blk, layout);
+      rp.format();
+      
+      
+      System.out.println("Filling the page with 10000 random records.");
+      int slot = rp.insertAfter(-1);
+      int count=-1;
+      
+      while (slot >= 0 && count!=1) {  
+         count++;
+         String randomString = generateRandomString();
+         rp.setInt(slot, "A", count);
+         rp.setString(slot, "B",randomString);
+         System.out.println("inserting into slot " + slot + ": {" + count + ", " + randomString+"}");
+         slot = rp.insertAfter(slot);
+      }
+      
+      System.out.println(rp.getString(280, "B"));
+  
+  }   
+   
+   public static String generateRandomString() {
+	   String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	   int length=12;
+	   
+	   StringBuilder sb = new StringBuilder();
+	   Random random = new Random();
+	   for (int i = 0; i < length; i++)
+		   sb.append(candidateChars.charAt(random.nextInt(candidateChars.length())));
+
+	   return sb.toString();
+   }
+}

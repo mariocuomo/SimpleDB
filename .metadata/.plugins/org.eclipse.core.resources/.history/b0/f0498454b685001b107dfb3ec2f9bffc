@@ -1,0 +1,83 @@
+package simpledb.record;
+
+import simpledb.server.SimpleDB;
+
+import java.nio.charset.Charset;
+import java.util.Random;
+
+import simpledb.file.BlockId;
+import simpledb.tx.Transaction;
+
+public class RecordExamTest {
+   public static void main(String[] args) throws Exception {
+
+      SimpleDB db = new SimpleDB("recordtest", 2000, 500);
+      Transaction tx = db.newTx();
+
+      Schema sch = new Schema();
+      sch.addIntField("A");
+      sch.addStringField("B", 12);
+      
+      Layout layout = new Layout(sch);
+      for (String fldname : layout.schema().fields()) {
+          int offset = layout.offset(fldname);
+          System.out.println(fldname + " has offset " + offset);
+       }
+      
+      BlockId blk = tx.append("testRecordExam");
+      tx.pin(blk);
+      RecordPage rp = new RecordPage(tx, blk, layout);
+      rp.format();
+      
+      
+      System.out.println("Filling the page with 10000 random records.");
+      int slot = rp.insertAfter(-1);      
+      TableScan ts = new TableScan(tx, "T", layout);
+      for (int i=1; i<100000;  i++) {
+         ts.insert();
+         String randomString = generateRandomString();
+         ts.setInt("A", i);
+         rp.setString(slot, "B",randomString);
+         System.out.println("inserting into slot " + ts.getRid()  + ": {" + i + ", " + randomString+"}");
+      }
+      System.out.println("USED "+ ts.getRid().blockNumber()+" block");
+      
+      System.out.println("Deleting these records, whose A-values are less than 20000");
+      int count = 0;
+      ts.beforeFirst();
+      while (ts.next()) {
+         int a = ts.getInt("A");
+         String b = ts.getString("B");
+         if (a <= 20000) {
+            count++;
+            System.out.println("slot " + ts.getRid() + ": {" + a + ", " + b + "}");
+            ts.delete();
+         }
+      }
+      System.out.println(count + " values under 20000 were deleted.\n");
+      ts.beforeFirst();
+      for (int i=1; i<10000;  i++) {
+          ts.insert();
+          String randomString = generateRandomString();
+          int n = (int) Math.round(Math.random() * 50);
+          ts.setInt("A", n);
+          rp.setString(slot, "B",randomString);
+          System.out.println("inserting into slot " + ts.getRid()  + ": {" + n + ", " + randomString+"}");
+       }
+      
+      //System.out.println(rp.getString(280, "B"));
+  
+  }   
+   
+   public static String generateRandomString() {
+	   String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	   int length=12;
+	   
+	   StringBuilder sb = new StringBuilder();
+	   Random random = new Random();
+	   for (int i = 0; i < length; i++)
+		   sb.append(candidateChars.charAt(random.nextInt(candidateChars.length())));
+
+	   return sb.toString();
+   }
+}

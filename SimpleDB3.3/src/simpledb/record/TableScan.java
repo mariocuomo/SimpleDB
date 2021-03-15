@@ -110,7 +110,34 @@ public class TableScan implements UpdateScan {
    public RID getRid() {
       return new RID(rp.block().number(), currentslot);
    }
+   
+   public int getNumberOfFreeBlock() {
+	   int currentslot_tmp = this.currentslot;
+	   int block_number_tmp=rp.block().number();
+	   moveToBlock(0);
+	   
+	   int count=0;
+	   while(!atLastBlock()) {
+		   if(isTheBlockFree())
+			   count++;
+         moveToBlock(rp.block().number()+1);
+	   }
+	   
+	   this.currentslot=currentslot_tmp;
+       moveToBlock(block_number_tmp);
+	   return count;
+   }
 
+   public boolean isTheBlockFree() {
+	   currentslot=0;
+	   while (currentslot >= 0) {
+	         if (!rp.isFree(currentslot))
+	        	 return false;
+	         currentslot = rp.nextAfter(currentslot);
+	      }
+	   return true;
+   }
+   
    // Private auxiliary methods
 
    private void moveToBlock(int blknum) {
@@ -131,4 +158,6 @@ public class TableScan implements UpdateScan {
    private boolean atLastBlock() {
       return rp.block().number() == tx.size(filename) - 1;
    }
+   
+   
 }
