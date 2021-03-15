@@ -12,3 +12,5 @@ This repository is inspired by [Database Systems II course](http://www.dia.uniro
 My updates to SimpleDB system:
 * Created a class to store statistics of reading/writing blocks
 * Implemented other replacement strategies (FIFO, LRU, clock) 
+* Implemented class test for Record Manager
+* Refactoring Record's class to detect buffer with all deprecated values 
