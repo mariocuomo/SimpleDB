@@ -2,6 +2,7 @@ package simpledb.buffer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import simpledb.file.*;
 import simpledb.log.LogMgr;
@@ -236,29 +237,6 @@ public class BufferMgr {
 
 	public void setLastBufferModified(int lastBufferModified) {
 		this.lastBufferModified = lastBufferModified;
-	}
-	
-	public void printStatusOfBuffer() {
-		StringBuilder sb = new StringBuilder();
-		for(int i =0; i<bufferpool.length;i++) {
-			Buffer b = bufferpool[i];
-			if(b!=null){
-				BlockId block = b.block();
-				long unpinTime = b.getIstant_unpin();
-				long loadTime = b.getIstant_load();
-				int pins = bufferpool[i].getPins();
-				
-				sb.append("bufferpool["+i+"]: ");
-				sb.append("PINS: "+pins + ", ");
-				sb.append("BLOCK: "+ block.number()+ ", ");
-				sb.append("LOAD_TIME: "+ loadTime+ ", ");
-				sb.append("UNPIN_TIME: "+ unpinTime+ ", ");
-				sb.append("MODIFIED: "+ b.isModified());
-			}
-			System.out.println(sb.toString());
-			sb.setLength(0);
-		}
-		System.out.println();
 	}
 	
 	

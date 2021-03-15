@@ -117,18 +117,8 @@ public long getIstant_unpin() {
 public void setIstant_unpin(long istant_unpin) {
 	this.istant_unpin = istant_unpin;
 }
-
-public int getPins() {
-	return pins;
-}
-
-public void setPins(int pins) {
-	this.pins = pins;
-}
    
-public boolean isModified() {
-	return txnum>0;
-}
+   
 
 
    

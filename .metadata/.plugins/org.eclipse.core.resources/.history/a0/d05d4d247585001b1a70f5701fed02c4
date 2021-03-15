@@ -34,46 +34,32 @@ public class BufferExamTest {
 		  ReplaceStategy strategy=bm.strategy;  
 	      
 	      if(strategy==ReplaceStategy.NAIVE) {
-	    	  System.out.println("start");
 		      bm.printStatusOfBuffer();
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
-		      System.out.println("LATER unpin70");
 		      bm.printStatusOfBuffer();
 		      bm.pin(blk60); //pin60
-		      System.out.println("LATER pin60");
 		      bm.printStatusOfBuffer();
 		      (bm.getBufferpool()[0]).setModified(1, 0); //setXXX(60,...)
-		      System.out.println("LATER setXXX(60,...)");
 		      bm.printStatusOfBuffer();
 		      bm.unpin(bm.getBufferpool()[0]); //unpin60
-		      System.out.println("LATER unpin60");
 		      bm.printStatusOfBuffer();
 		      bm.flushAll(0);//flushAll
-		      System.out.println("LATER flushAll");
 		      bm.printStatusOfBuffer();
 		      (bm.getBufferpool()[3]).setModified(1, 0); //setXXX(47,...)
-		      System.out.println("LATER setXXX(47,...)");
 		      bm.printStatusOfBuffer();
 		      bm.unpin(bm.getBufferpool()[3]); //unpin47
-		      System.out.println("LATER unpin47");
 		      bm.printStatusOfBuffer();
 		      bm.pin(blk70); //pin70
-		      System.out.println("LATER pin70");
 		      bm.printStatusOfBuffer();
 		      (bm.getBufferpool()[0]).setModified(1, 0); //setXXX(70,...)
-		      System.out.println("LATER setXXX(70,...)");
 		      bm.printStatusOfBuffer();
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
-		      System.out.println("LATER unpin70");
 		      bm.printStatusOfBuffer();
 		      bm.pin(blk60); //pin(60)
-		      System.out.println("LATER pin(60)");
 		      bm.printStatusOfBuffer();
 		      bm.unpin(bm.getBufferpool()[0]); //unpin60
-		      System.out.println("LATER unpin(60)");
 		      bm.printStatusOfBuffer();
 		      bm.pin(blk70); //pin(70)
-		      System.out.println("LATER pin(70)");
 		      bm.printStatusOfBuffer();
 	      }
 	      

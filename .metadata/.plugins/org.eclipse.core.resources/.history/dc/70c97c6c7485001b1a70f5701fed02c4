@@ -258,7 +258,6 @@ public class BufferMgr {
 			System.out.println(sb.toString());
 			sb.setLength(0);
 		}
-		System.out.println();
 	}
 	
 	

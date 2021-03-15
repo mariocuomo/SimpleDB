@@ -238,7 +238,7 @@ public class BufferMgr {
 		this.lastBufferModified = lastBufferModified;
 	}
 	
-	public void printStatusOfBuffer() {
+	void printStatusOfBuffer() {
 		StringBuilder sb = new StringBuilder();
 		for(int i =0; i<bufferpool.length;i++) {
 			Buffer b = bufferpool[i];
@@ -253,12 +253,10 @@ public class BufferMgr {
 				sb.append("BLOCK: "+ block.number()+ ", ");
 				sb.append("LOAD_TIME: "+ loadTime+ ", ");
 				sb.append("UNPIN_TIME: "+ unpinTime+ ", ");
-				sb.append("MODIFIED: "+ b.isModified());
+				sb.append("MODIFIE: "+ b.isModified());
 			}
 			System.out.println(sb.toString());
-			sb.setLength(0);
 		}
-		System.out.println();
 	}
 	
 	

@@ -256,9 +256,7 @@ public class BufferMgr {
 				sb.append("MODIFIED: "+ b.isModified());
 			}
 			System.out.println(sb.toString());
-			sb.setLength(0);
 		}
-		System.out.println();
 	}
 	
 	
