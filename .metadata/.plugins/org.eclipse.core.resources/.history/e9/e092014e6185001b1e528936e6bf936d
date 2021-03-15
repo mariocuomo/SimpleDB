@@ -222,7 +222,7 @@ public class BufferMgr {
 		this.bufferpool = bufferpool;
 	}
 	
-	public void setStrategy(ReplaceStategy strategy) {
+	public void setStrategy(ReplaceStategy stategy) {
 		this.strategy = strategy;
 	}
 	   
