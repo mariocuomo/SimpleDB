@@ -129,16 +129,16 @@ public class BufferMgr {
    
    private Buffer chooseUnpinnedBuffer() {
 	  switch(strategy) {
-		  case NAIVE :
+		  case ReplaceStategy.NAIVE :
 		      return chooseUnpinnedBufferNaive();
 		   
-		  case FIFO :
+		  case 1 :
 			  return chooseUnpinnedBufferFIFO();
 		      
-		  case LRU :
+		  case 2 :
 			  return chooseUnpinnedBufferLRU();
 		  
-		  case CLOCK :
+		  case 3 :
 			  return chooseUnpinnedBufferClock();
 
 	  }
@@ -222,7 +222,7 @@ public class BufferMgr {
 		this.bufferpool = bufferpool;
 	}
 	
-	public void setStrategy(ReplaceStategy stategy) {
+	public void setStrategy(int strategy) {
 		this.strategy = strategy;
 	}
 	   

@@ -33,6 +33,7 @@ public class BufferExamTest {
 	      
 		  ReplaceStategy strategy=bm.strategy;  
 	      
+	      //naif strategy
 	      if(strategy==ReplaceStategy.NAIVE) {
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
@@ -49,6 +50,7 @@ public class BufferExamTest {
 		      bm.pin(blk70); //pin(70)
 	      }
 	      
+	      //FIFO strategy
 	      if(strategy==ReplaceStategy.FIFO) {
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
@@ -65,6 +67,7 @@ public class BufferExamTest {
 		      bm.pin(blk70); //pin(70)
 	      }
 	      
+	      //LRU strategy
 	      if(strategy==ReplaceStategy.LRU) {
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
@@ -81,6 +84,7 @@ public class BufferExamTest {
 		      bm.pin(blk70); //pin(70)
 	      }
 	      
+	      //clock strategy
 	      if(strategy==ReplaceStategy.CLOCK) {
 	    	  bm.setLastBufferModified(-1);
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70

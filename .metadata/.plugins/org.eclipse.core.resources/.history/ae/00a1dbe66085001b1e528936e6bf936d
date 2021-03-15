@@ -31,9 +31,17 @@ public class BufferExamTest {
 	    	  buffer.setIstant_load(System.currentTimeMillis());
 	      
 	      
-		  ReplaceStategy strategy=bm.strategy;  
+		  int strategy=bm.strategy; 
+		   /*
+		    * Four general replacement strategies
+		    * 0->naïve
+		    * 1->FIFO
+		    * 2->LRU
+		    * 3->clock
+		    */  
 	      
-	      if(strategy==ReplaceStategy.NAIVE) {
+	      //naif strategy
+	      if(strategy==0) {
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
 		      (bm.getBufferpool()[0]).setModified(1, 0); //setXXX(60,...)
@@ -49,7 +57,8 @@ public class BufferExamTest {
 		      bm.pin(blk70); //pin(70)
 	      }
 	      
-	      if(strategy==ReplaceStategy.FIFO) {
+	      //FIFO strategy
+	      if(strategy==1) {
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
 		      (bm.getBufferpool()[0]).setModified(1, 0); //setXXX(60,...)
@@ -65,7 +74,8 @@ public class BufferExamTest {
 		      bm.pin(blk70); //pin(70)
 	      }
 	      
-	      if(strategy==ReplaceStategy.LRU) {
+	      //LRU strategy
+	      if(strategy==2) {
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
 		      (bm.getBufferpool()[2]).setModified(1, 0); //setXXX(60,...)
@@ -81,7 +91,8 @@ public class BufferExamTest {
 		      bm.pin(blk70); //pin(70)
 	      }
 	      
-	      if(strategy==ReplaceStategy.CLOCK) {
+	      //clock strategy
+	      if(strategy==3) {
 	    	  bm.setLastBufferModified(-1);
 		      bm.unpin(bm.getBufferpool()[0]); //unpin70
 		      bm.pin(blk60); //pin60
