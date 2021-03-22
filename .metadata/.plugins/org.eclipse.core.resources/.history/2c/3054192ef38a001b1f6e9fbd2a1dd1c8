@@ -29,7 +29,12 @@ public class RecordExamTest {
        }
       System.out.println("RL=" + layout.slotSize());
 
-           
+      BlockId blk = tx.append("testRecordExam");
+      tx.pin(blk);
+      RecordPage rp = new RecordPage(tx, blk, layout);
+      rp.format();
+      
+      
       System.out.println("Filling the page with 10000 random records.");
       TableScan ts = new TableScan(tx, "T", layout);
       for (int i=1; i<100000;  i++) {
