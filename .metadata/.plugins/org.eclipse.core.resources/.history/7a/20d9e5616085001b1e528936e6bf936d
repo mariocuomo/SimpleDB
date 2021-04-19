@@ -1,7 +1,0 @@
-package simpledb.buffer;
-
-public enum ReplaceStategy {
-		    LOW,
-		    MEDIUM,
-		    HIGH
-}
